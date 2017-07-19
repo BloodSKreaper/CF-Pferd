@@ -1,0 +1,19 @@
+name: CF-Pferd
+version: 1.12.1
+author: ChrisOchs
+
+main: me.chrisochs.cfpferd.First
+depend: [CF-PlayerdataAPI]
+commands:
+  pferd:
+    description: null
+    usage: /<command>  
+    permission: cf.pferd
+    aliases: [Horse, horse]  
+  horsereload:
+    description: null
+    usage: /<command>  
+    permission: cf.reload
+  horseedit:
+    description: null
+    usage: /<command>
