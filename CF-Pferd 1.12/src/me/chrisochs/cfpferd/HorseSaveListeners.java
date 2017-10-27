@@ -33,7 +33,7 @@ public class HorseSaveListeners implements Listener{
 		}else if(e.getVehicle()instanceof Boat){
 			try{
 			Boat b = (Boat) e.getVehicle();
-			if(b.getCustomName().equalsIgnoreCase("RIDING")){
+			if(b.getCustomName() != null && b.getCustomName().equalsIgnoreCase("RIDING")){
 				e.setCancelled(false);
 				if(e.getExited() instanceof Player&&b.getPassengers().size() !=2){
 				b.remove();
