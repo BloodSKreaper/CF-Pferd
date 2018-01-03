@@ -115,6 +115,7 @@ private void spawnBoat(Player p) {
 	boat.setCustomName("RIDING");
 	boat.setCustomNameVisible(false);
 	boat.addPassenger(p);
+	boat.setInvulnerable(true);
 	p.sendMessage("§2Dein Boot wurde gespawnt!");
 	
 }
