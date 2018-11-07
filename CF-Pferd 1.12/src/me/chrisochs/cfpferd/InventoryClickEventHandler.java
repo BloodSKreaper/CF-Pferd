@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class InventoryClickEventHandler implements Listener{
-	private First First;
-	public InventoryClickEventHandler(First first){
+	private CF_Pferd First;
+	public InventoryClickEventHandler(CF_Pferd first){
 		First = first;
 	}
 	

@@ -268,6 +268,7 @@ public class Itemsets {
 			istackMeta6.setDisplayName("§2§lRüstung editieren");
 			istack6.setItemMeta(istackMeta6);
 
+			//FOR SKELETON AND ZOMBIE HORSES
 			/*ItemStack istack8= new ItemStack(Material.SKULL_ITEM, 1, (short) 2);
 			ItemMeta istackMeta8 = istack8.getItemMeta();
 			istackMeta8.setLore(Art);
