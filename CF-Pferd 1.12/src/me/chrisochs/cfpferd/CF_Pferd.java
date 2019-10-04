@@ -8,7 +8,6 @@ import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
@@ -23,17 +22,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.minecraft.server.v1_12_R1.AttributeInstance;
-import net.minecraft.server.v1_12_R1.EntityInsentient;
-import net.minecraft.server.v1_12_R1.GenericAttributes;
-
 public class CF_Pferd extends JavaPlugin implements Listener {
 	// DEKLARIERUNGEN
 	private playerdata playerdata = new playerdata();
 	InventoryManager InventoryManager = new InventoryManager();
 	Itemsets Itemsets = new Itemsets(playerdata);
 
-	public static final double NORMAL_SPEED = 0.23888842211270872;
 
 	public void onEnable() {
 		PluginManager manager = getServer().getPluginManager();
@@ -68,10 +62,7 @@ public class CF_Pferd extends JavaPlugin implements Listener {
 				p.sendMessage("§cDu musst zuerst aus deinem derzeitigen Vehikel aussteigen!");
 			} else {
 				if (p.getLocation().getBlock().getType().equals(Material.WATER)
-						|| p.getLocation().getBlock().getType().equals(Material.STATIONARY_WATER)
-						|| p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.WATER
-						|| p.getLocation().getBlock().getRelative(BlockFace.DOWN)
-								.getType() == Material.STATIONARY_WATER) {
+						|| p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.WATER) {
 					this.spawnBoat(p);
 				} else {
 					this.SpawnHorse(p);
@@ -79,7 +70,9 @@ public class CF_Pferd extends JavaPlugin implements Listener {
 			}
 		}
 
-		if (cmd.getName().equalsIgnoreCase("horseedit")) {
+		if (cmd.getName().equalsIgnoreCase("horseedit"))
+
+		{
 			if (p.hasPermission("cf.horseedit")) {
 				Inventory inv = InventoryManager.getInventory(p);
 				p.openInventory(inv);
@@ -116,10 +109,6 @@ public class CF_Pferd extends JavaPlugin implements Listener {
 		h.setInvulnerable(true);
 
 		modifyHorseOfPlayer(h, p);
-
-		AttributeInstance attributes = ((EntityInsentient) ((CraftLivingEntity) h).getHandle())
-				.getAttributeInstance(GenericAttributes.MOVEMENT_SPEED);
-		attributes.setValue(NORMAL_SPEED);
 		p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 3);
 		h.addPassenger(p.getPlayer());
 		h.setCustomName("RIDING");
@@ -223,11 +212,11 @@ public class CF_Pferd extends JavaPlugin implements Listener {
 	private ItemStack getArmorFromString(String armorString) {
 		switch (armorString) {
 		case "IRON_BARDING":
-			return new ItemStack(Material.IRON_BARDING, 1);
+			return new ItemStack(Material.IRON_HORSE_ARMOR, 1);
 		case "GOLD_BARDING":
-			return new ItemStack(Material.GOLD_BARDING, 1);
+			return new ItemStack(Material.GOLDEN_HORSE_ARMOR, 1);
 		case "DIAMOND_BARDING":
-			return new ItemStack(Material.DIAMOND_BARDING, 1);
+			return new ItemStack(Material.DIAMOND_HORSE_ARMOR, 1);
 		case "NONE":
 			return new ItemStack(Material.AIR, 1);
 		}

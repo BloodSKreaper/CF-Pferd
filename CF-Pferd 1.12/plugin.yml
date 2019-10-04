@@ -1,6 +1,7 @@
 name: CF-Pferd
 version: 1.12.1
 author: ChrisOchs
+api-version: 1.13
 
 main: me.chrisochs.cfpferd.CF_Pferd
 depend: [CF-PlayerdataAPI]
