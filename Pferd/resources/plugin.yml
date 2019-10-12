@@ -1,9 +1,10 @@
 name: CF-Pferd
-version: 1.12.1
-author: ChrisOchs
-api-version: 1.14.4
+version: ${version}
+author: ${author}
+website: ${url}
+api-version: ${api-version}
 
-main: de.craftersforever.pferd.Pferd
+main: ${mainClass}
 commands:
   pferd:
     description: Summons a horse

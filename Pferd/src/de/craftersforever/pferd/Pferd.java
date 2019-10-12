@@ -2,10 +2,10 @@ package de.craftersforever.pferd;
 
 
 import de.craftersforever.pferd.commands.PferdCommand;
-import de.craftersforever.pferd.listeners.InventoryClickListener;
 import de.craftersforever.pferd.listeners.InventoryOpenListener;
 import de.craftersforever.pferd.listeners.PlayerListener;
 import de.craftersforever.pferd.listeners.VehicleListener;
+import de.craftersforever.pferd.listeners.InventoryClickListener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 

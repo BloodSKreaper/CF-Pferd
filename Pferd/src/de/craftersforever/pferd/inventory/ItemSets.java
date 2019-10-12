@@ -3,7 +3,7 @@ package de.craftersforever.pferd.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gmail.filoghost.hiddenstring.HiddenStringUtils;
+import com.gmail.filoghost.HiddenStringUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -55,10 +55,10 @@ class ItemSets {
         style.add(getItemStack(Material.SKELETON_SPAWN_EGG, "Schwarze Pünktchen","Schwarze Pünktchen auswählen","setStyleBLACK_DOTS"));
         style.add(getItemStack(Material.WOLF_SPAWN_EGG, "Weiße Pünktchen","Weiße Pünktchen auswählen", "setStyleWHITE_DOTS"));
         style.add(getItemStack(Material.POLAR_BEAR_SPAWN_EGG, "Weiße Flecken","Weiße Flecken auswählen", "setStyleWHITEFIELD"));
-        style.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
         style.add(getItemStack(Material.RED_STAINED_GLASS_PANE, "Kein Muster","Kein Muster auswählen", "setStyleNONE"));
-        style.add(getItemStack(Material.AIR, ""));
-        style.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
+        style.add(new ItemStack(Material.AIR));
         style.add(getItemStack(Material.RED_WOOL, "Zurück","Zurück zur Übersicht", "showMenuSelection"));
     }
     // MUSTER ENDE
@@ -83,7 +83,7 @@ class ItemSets {
         color.add(getItemStack(Material.MELON_SEEDS, "Dunkelbraun","Dunkelbraun auswählen", "setColorDARK_BROWN"));
         color.add(getItemStack(Material.GRAY_DYE, "Grau","Grau auswählen","setColorGRAY"));
         color.add(getItemStack(Material.SUGAR, "Weiß","Weiß auswählen","setColorWHITE"));
-        color.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
         color.add(getItemStack(Material.RED_WOOL, "Zurück","Zurück zur Übersicht", "showMenuSelection"));
     }
     //Farbe Ende
@@ -105,13 +105,13 @@ class ItemSets {
          */
 
         armor.add(getItemStack(Material.IRON_HORSE_ARMOR, "Eisenrüstung","Eisenrüstung auswählen", "setArmorIRON_HORSE_ARMOR"));
-        armor.add(getItemStack(Material.AIR, ""));
-        armor.add(getItemStack(Material.GOLDEN_HORSE_ARMOR, "Goldrüstung","Goldrüstung auswählen", "setArmorGOLD_HORSE_ARMOR"));
-        armor.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
+        armor.add(getItemStack(Material.GOLDEN_HORSE_ARMOR, "Goldrüstung","Goldrüstung auswählen", "setArmorGOLDEN_HORSE_ARMOR"));
+        style.add(new ItemStack(Material.AIR));
         armor.add(getItemStack(Material.DIAMOND_HORSE_ARMOR, "Diamantrüstung", "Diamandrüstung auswählen", "setArmorDIAMOND_HORSE_ARMOR"));
-        armor.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
         armor.add(getItemStack(Material.RED_STAINED_GLASS_PANE, "Keine Rüstung", "Keine Rüstung auswählen", "setArmorAIR"));
-        armor.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
         armor.add(getItemStack(Material.RED_WOOL, "Zurück", "Zurück zur Auswahlseite", "showMenuSelection"));
     }
     // ENDE Armor
@@ -130,18 +130,18 @@ class ItemSets {
          * 8 = Schließen
          */
         selection.add(getItemStack(Material.BONE_MEAL, "Alter ändern", "§aKlicke um dein Pferd zu einem Pony/Pferd zu machen!", "changeAge"));
-        selection.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
         selection.add(getItemStack(Material.INK_SAC, "Farbe ändern", "§aHier kannst du die Farbe ändern","showMenuColor"));
-        selection.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
         selection.add(getItemStack(Material.SKELETON_SPAWN_EGG, "Muster ändern", "§aHier kannst du das Muster ändern","showMenuStyle"));
-        selection.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
         selection.add(getItemStack(Material.DIAMOND_HORSE_ARMOR, "Rüstung ändern","Hier kannst du die Rüstung ändern","showMenuArmor"));
-        selection.add(getItemStack(Material.AIR, ""));
+        style.add(new ItemStack(Material.AIR));
         selection.add(getItemStack(Material.RED_WOOL, "Schließen","Schließt das Auswahlmenü","closeInventory"));
     }
 
     private ItemStack getItemStack(Material material, String stackName){
-        ItemStack itemStack = new ItemStack(Material.RED_WOOL, 1);
+        ItemStack itemStack = new ItemStack(material, 1);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(stackName);
         itemStack.setItemMeta(itemMeta);
@@ -152,7 +152,7 @@ class ItemSets {
         List<String> itemLore = new ArrayList<>();
         itemLore.add(lore);
         itemLore.add(HiddenStringUtils.encodeString(hiddenString));
-        ItemStack itemStack = new ItemStack(Material.RED_WOOL, 1);
+        ItemStack itemStack = new ItemStack(material, 1);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(stackName);
         itemMeta.setLore(itemLore);

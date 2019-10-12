@@ -1,6 +1,5 @@
-package com.gmail.filoghost.hiddenstring;
+package com.gmail.filoghost;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import org.bukkit.ChatColor;
