@@ -30,7 +30,7 @@ public class PferdCommand implements CommandExecutor {
         Player p = (Player) sender;
         if (cmd.getName().equalsIgnoreCase("pferd")) {
             if (p.isInsideVehicle()) {
-                p.sendMessage("§Du kannst dein Pferd nicht rufen, wenn du in einem Fahrzeug bist.");
+                p.sendMessage("§cDu kannst dein Pferd nicht rufen, wenn du in einem Fahrzeug bist.");
                 return true;
             }
             spawnHorse(p);
