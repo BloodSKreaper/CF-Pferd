@@ -13,7 +13,7 @@ public class VehicleListener implements Listener {
         if(e.isCancelled())return;
         if (e.getVehicle().getType() != EntityType.HORSE) return;
         Horse h = (Horse) e.getVehicle();
-        if (!h.hasMetadata("craftersforever.pferd")) {
+        if (h.hasMetadata("craftersforever.pferd")) {
             if (e.getExited().getType() == EntityType.PLAYER) {
                 h.remove();
             }

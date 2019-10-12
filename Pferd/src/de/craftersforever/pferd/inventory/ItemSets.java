@@ -9,10 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 class ItemSets {
-	private List<ItemStack> selection = new ArrayList<>();
-	private List<ItemStack> color = new ArrayList<>();
-	private List<ItemStack> style = new ArrayList<>();
-	private List<ItemStack> armor = new ArrayList<>();
+	private ItemStack[] selection = new ItemStack[9];
+	private ItemStack[] color = new ItemStack[9];
+	private ItemStack[] style = new ItemStack[9];
+	private ItemStack[] armor = new ItemStack[9];
 
     ItemSets() {
         setupColorMenu();
@@ -21,19 +21,19 @@ class ItemSets {
         setupEquipmentMenu();
     }
 
-    List<ItemStack> getSelectionMenu(){
+    ItemStack[] getSelectionMenu(){
         return selection;
     }
 
-    List<ItemStack> getColorMenu(){
+    ItemStack[] getColorMenu(){
         return color;
     }
 
-    List<ItemStack> getStyleMenu(){
+    ItemStack[] getStyleMenu(){
         return style;
     }
 
-    List<ItemStack> getArmorMenu(){
+    ItemStack[] getArmorMenu(){
         return armor;
     }
 
@@ -51,15 +51,15 @@ class ItemSets {
          * 7 = Luft
          * 8 = Zurück
          */
-        style.add(getItemStack(Material.SNOW, "Weißes Abzeichen","Weißes Abzeichen auswählen","setStyleWHITE"));
-        style.add(getItemStack(Material.SKELETON_SPAWN_EGG, "Schwarze Pünktchen","Schwarze Pünktchen auswählen","setStyleBLACK_DOTS"));
-        style.add(getItemStack(Material.WOLF_SPAWN_EGG, "Weiße Pünktchen","Weiße Pünktchen auswählen", "setStyleWHITE_DOTS"));
-        style.add(getItemStack(Material.POLAR_BEAR_SPAWN_EGG, "Weiße Flecken","Weiße Flecken auswählen", "setStyleWHITEFIELD"));
-        style.add(new ItemStack(Material.AIR));
-        style.add(getItemStack(Material.RED_STAINED_GLASS_PANE, "Kein Muster","Kein Muster auswählen", "setStyleNONE"));
-        style.add(new ItemStack(Material.AIR));
-        style.add(new ItemStack(Material.AIR));
-        style.add(getItemStack(Material.RED_WOOL, "Zurück","Zurück zur Übersicht", "showMenuSelection"));
+        style[0] = getItemStack(Material.SNOW, "Weißes Abzeichen","Weißes Abzeichen auswählen","setStyleWHITE");
+        style[1] = getItemStack(Material.SKELETON_SPAWN_EGG, "Schwarze Pünktchen","Schwarze Pünktchen auswählen","setStyleBLACK_DOTS");
+        style[2] = getItemStack(Material.WOLF_SPAWN_EGG, "Weiße Pünktchen","Weiße Pünktchen auswählen", "setStyleWHITE_DOTS");
+        style[3] = getItemStack(Material.POLAR_BEAR_SPAWN_EGG, "Weiße Flecken","Weiße Flecken auswählen", "setStyleWHITEFIELD");
+        style[4] = new ItemStack(Material.AIR);
+        style[5] = getItemStack(Material.RED_STAINED_GLASS_PANE, "Kein Muster","Kein Muster auswählen", "setStyleNONE");
+        style[6] = new ItemStack(Material.AIR);
+        style[7] = new ItemStack(Material.AIR);
+        style[8] = getItemStack(Material.RED_WOOL, "Zurück","Zurück zur Übersicht", "showMenuSelection");
     }
     // MUSTER ENDE
 
@@ -76,15 +76,15 @@ class ItemSets {
         * 7 = Luft
         * 8 = Zurück
          */
-        color.add(getItemStack(Material.INK_SAC, "Schwarz", "Schwarz auswählen", "setColorBLACK"));
-        color.add(getItemStack(Material.COCOA_BEANS, "Braun", "Braun auswählen", "setColorBROWN"));
-        color.add(getItemStack(Material.BROWN_STAINED_GLASS_PANE, "Nougat", "Nougat auswählen", "setColorCHESTNUT"));
-        color.add(getItemStack(Material.PUMPKIN_SEEDS, "Cremig","Cremig auswählen", "setColorCREAMY"));
-        color.add(getItemStack(Material.MELON_SEEDS, "Dunkelbraun","Dunkelbraun auswählen", "setColorDARK_BROWN"));
-        color.add(getItemStack(Material.GRAY_DYE, "Grau","Grau auswählen","setColorGRAY"));
-        color.add(getItemStack(Material.SUGAR, "Weiß","Weiß auswählen","setColorWHITE"));
-        style.add(new ItemStack(Material.AIR));
-        color.add(getItemStack(Material.RED_WOOL, "Zurück","Zurück zur Übersicht", "showMenuSelection"));
+        color[0] = getItemStack(Material.INK_SAC, "Schwarz", "Schwarz auswählen", "setColorBLACK");
+        color[1] = getItemStack(Material.COCOA_BEANS, "Braun", "Braun auswählen", "setColorBROWN");
+        color[2] = getItemStack(Material.BROWN_STAINED_GLASS_PANE, "Nougat", "Nougat auswählen", "setColorCHESTNUT");
+        color[3] = getItemStack(Material.PUMPKIN_SEEDS, "Cremig","Cremig auswählen", "setColorCREAMY");
+        color[4] = getItemStack(Material.MELON_SEEDS, "Dunkelbraun","Dunkelbraun auswählen", "setColorDARK_BROWN");
+        color[5] = getItemStack(Material.GRAY_DYE, "Grau","Grau auswählen","setColorGRAY");
+        color[6] = getItemStack(Material.SUGAR, "Weiß","Weiß auswählen","setColorWHITE");
+        color[7] = new ItemStack(Material.AIR);
+        color[8] = getItemStack(Material.RED_WOOL, "Zurück","Zurück zur Übersicht", "showMenuSelection");
     }
     //Farbe Ende
 
@@ -104,15 +104,15 @@ class ItemSets {
         * 8 = Zurück
          */
 
-        armor.add(getItemStack(Material.IRON_HORSE_ARMOR, "Eisenrüstung","Eisenrüstung auswählen", "setArmorIRON_HORSE_ARMOR"));
-        style.add(new ItemStack(Material.AIR));
-        armor.add(getItemStack(Material.GOLDEN_HORSE_ARMOR, "Goldrüstung","Goldrüstung auswählen", "setArmorGOLDEN_HORSE_ARMOR"));
-        style.add(new ItemStack(Material.AIR));
-        armor.add(getItemStack(Material.DIAMOND_HORSE_ARMOR, "Diamantrüstung", "Diamandrüstung auswählen", "setArmorDIAMOND_HORSE_ARMOR"));
-        style.add(new ItemStack(Material.AIR));
-        armor.add(getItemStack(Material.RED_STAINED_GLASS_PANE, "Keine Rüstung", "Keine Rüstung auswählen", "setArmorAIR"));
-        style.add(new ItemStack(Material.AIR));
-        armor.add(getItemStack(Material.RED_WOOL, "Zurück", "Zurück zur Auswahlseite", "showMenuSelection"));
+        armor[0] = getItemStack(Material.IRON_HORSE_ARMOR, "Eisenrüstung","Eisenrüstung auswählen", "setArmorIRON_HORSE_ARMOR");
+        armor[1] = new ItemStack(Material.AIR);
+        armor[2] = getItemStack(Material.GOLDEN_HORSE_ARMOR, "Goldrüstung","Goldrüstung auswählen", "setArmorGOLDEN_HORSE_ARMOR");
+        armor[3]=new ItemStack(Material.AIR);
+        armor[4]=getItemStack(Material.DIAMOND_HORSE_ARMOR, "Diamantrüstung", "Diamandrüstung auswählen", "setArmorDIAMOND_HORSE_ARMOR");
+        armor[5]=new ItemStack(Material.AIR);
+        armor[6]=getItemStack(Material.RED_STAINED_GLASS_PANE, "Keine Rüstung", "Keine Rüstung auswählen", "setArmorAIR");
+        armor[7]=new ItemStack(Material.AIR);
+        armor[8]=getItemStack(Material.RED_WOOL, "Zurück", "Zurück zur Auswahlseite", "showMenuSelection");
     }
     // ENDE Armor
 
@@ -129,24 +129,17 @@ class ItemSets {
          * 7 = Luft
          * 8 = Schließen
          */
-        selection.add(getItemStack(Material.BONE_MEAL, "Alter ändern", "§aKlicke um dein Pferd zu einem Pony/Pferd zu machen!", "changeAge"));
-        style.add(new ItemStack(Material.AIR));
-        selection.add(getItemStack(Material.INK_SAC, "Farbe ändern", "§aHier kannst du die Farbe ändern","showMenuColor"));
-        style.add(new ItemStack(Material.AIR));
-        selection.add(getItemStack(Material.SKELETON_SPAWN_EGG, "Muster ändern", "§aHier kannst du das Muster ändern","showMenuStyle"));
-        style.add(new ItemStack(Material.AIR));
-        selection.add(getItemStack(Material.DIAMOND_HORSE_ARMOR, "Rüstung ändern","Hier kannst du die Rüstung ändern","showMenuArmor"));
-        style.add(new ItemStack(Material.AIR));
-        selection.add(getItemStack(Material.RED_WOOL, "Schließen","Schließt das Auswahlmenü","closeInventory"));
+        selection[0] = getItemStack(Material.BONE_MEAL, "Alter ändern", "§aKlicke um dein Pferd zu einem Pony/Pferd zu machen!", "changeAge");
+        selection[1] = new ItemStack(Material.AIR);
+        selection[2] = getItemStack(Material.INK_SAC, "Farbe ändern", "§aHier kannst du die Farbe ändern","showMenuColor");
+        selection[          3] = new ItemStack(Material.AIR);
+        selection[4] = getItemStack(Material.SKELETON_SPAWN_EGG, "Muster ändern", "§aHier kannst du das Muster ändern","showMenuStyle");
+        selection[5] = new ItemStack(Material.AIR);
+        selection[6] = getItemStack(Material.DIAMOND_HORSE_ARMOR, "Rüstung ändern","Hier kannst du die Rüstung ändern","showMenuArmor");
+        selection[7] = new ItemStack(Material.AIR);
+        selection[8] = getItemStack(Material.RED_WOOL, "Schließen","Schließt das Auswahlmenü","closeInventory");
     }
 
-    private ItemStack getItemStack(Material material, String stackName){
-        ItemStack itemStack = new ItemStack(material, 1);
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(stackName);
-        itemStack.setItemMeta(itemMeta);
-        return itemStack;
-    }
 
     private ItemStack getItemStack(Material material, String stackName, String lore, String hiddenString){
         List<String> itemLore = new ArrayList<>();
@@ -154,8 +147,10 @@ class ItemSets {
         itemLore.add(HiddenStringUtils.encodeString(hiddenString));
         ItemStack itemStack = new ItemStack(material, 1);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(stackName);
-        itemMeta.setLore(itemLore);
+        if(itemMeta != null) {
+            itemMeta.setDisplayName(stackName);
+            itemMeta.setLore(itemLore);
+        }
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

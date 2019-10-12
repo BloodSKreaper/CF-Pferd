@@ -1,13 +1,12 @@
 package de.craftersforever.pferd.inventory;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public class InventoryManager {
 
@@ -27,30 +26,30 @@ public class InventoryManager {
     }
 
     public static void showCoordinationMenu(Inventory inv){
-        List<ItemStack> menuItems = itemSets.getSelectionMenu();
-        for(int i = 0; i < menuItems.size(); i++){
-            inv.setItem(i,menuItems.get(i));
+        ItemStack[] menuItems = itemSets.getSelectionMenu();
+        for(int i = 0; i < menuItems.length; i++){
+            inv.setItem(i,menuItems[i]);
         }
     }
 
     public static void showColorMenu(Inventory inv){
-        List<ItemStack> menuItems = itemSets.getColorMenu();
-        for(int i = 0; i < menuItems.size(); i++){
-            inv.setItem(i,menuItems.get(i));
+        ItemStack[] menuItems = itemSets.getColorMenu();
+        for(int i = 0; i < menuItems.length; i++){
+            inv.setItem(i,menuItems[i]);
         }
     }
 
     public static void showStyleMenu(Inventory inv){
-        List<ItemStack> menuItems = itemSets.getStyleMenu();
-        for(int i = 0; i < menuItems.size(); i++){
-            inv.setItem(i,menuItems.get(i));
+        ItemStack[] menuItems = itemSets.getStyleMenu();
+        for(int i = 0; i < menuItems.length; i++){
+            inv.setItem(i,menuItems[i]);
         }
     }
 
     public static void showArmorMenu(Inventory inv){
-        List<ItemStack> menuItems = itemSets.getArmorMenu();
-        for(int i = 0; i < menuItems.size(); i++){
-            inv.setItem(i,menuItems.get(i));
+        ItemStack[] menuItems = itemSets.getArmorMenu();
+        for(int i = 0; i < menuItems.length; i++){
+            inv.setItem(i,menuItems[i]);
         }
     }
 
