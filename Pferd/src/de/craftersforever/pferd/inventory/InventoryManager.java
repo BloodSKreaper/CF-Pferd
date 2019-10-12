@@ -25,6 +25,10 @@ public class InventoryManager {
         return inv;
     }
 
+    public static boolean isCachedInventory(Inventory inventory){
+        return inventories.containsValue(inventory);
+    }
+
     public static void showCoordinationMenu(Inventory inv){
         ItemStack[] menuItems = itemSets.getSelectionMenu();
         for(int i = 0; i < menuItems.length; i++){

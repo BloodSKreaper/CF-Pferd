@@ -35,9 +35,12 @@ public class InventoryClickListener implements Listener {
         e.setCancelled(true);
         if (e.getCurrentItem() == null) return;
         if (!e.getCurrentItem().hasItemMeta())return;
-        if(e.getCurrentItem().getItemMeta().getLore() == null) return;
+        if(!e.getCurrentItem().getItemMeta().hasLore()) return;
         if (e.getCurrentItem().getItemMeta().getLore().size() < 2) return;
-        if (!p.isInsideVehicle())return;
+        if (!p.isInsideVehicle()){
+            p.closeInventory();
+            return;
+        }
         if(p.getVehicle().getType() != EntityType.HORSE) {
             p.closeInventory();
             return;

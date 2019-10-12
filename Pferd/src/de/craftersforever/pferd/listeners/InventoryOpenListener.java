@@ -5,6 +5,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 
@@ -23,6 +24,15 @@ public class InventoryOpenListener implements Listener {
         e.setCancelled(true);
         InventoryManager.showCoordinationMenu(inventory);
         e.getPlayer().openInventory(inventory);
+    }
+
+    @EventHandler
+    public void onMoveItem(InventoryMoveItemEvent event){
+        if (event.isCancelled()) return;
+        Inventory destination = event.getDestination();
+        if(InventoryManager.isCachedInventory(destination)){
+            event.setCancelled(true);
+        }
     }
 
 }
