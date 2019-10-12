@@ -31,7 +31,8 @@ public class InventoryClickListener implements Listener {
         if (e.getWhoClicked().getType() != EntityType.PLAYER) return;
         Player p = (Player) e.getWhoClicked();
         Inventory customInventory = InventoryManager.getInventory(p.getUniqueId());
-        if (!customInventory.equals(e.getClickedInventory())) return;
+
+        if (!customInventory.equals(e.getClickedInventory()) && customInventory.equals(e.getInventory())) return;
         e.setCancelled(true);
         if (e.getCurrentItem() == null) return;
         if (!e.getCurrentItem().hasItemMeta())return;

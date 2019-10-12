@@ -5,8 +5,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryMoveItemEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 
 public class InventoryOpenListener implements Listener {
@@ -27,10 +26,19 @@ public class InventoryOpenListener implements Listener {
     }
 
     @EventHandler
-    public void onMoveItem(InventoryMoveItemEvent event){
-        if (event.isCancelled()) return;
-        Inventory destination = event.getDestination();
-        if(InventoryManager.isCachedInventory(destination)){
+    public void onDragItem(InventoryDragEvent event){
+        if(event.isCancelled())return;
+        Inventory inventory = event.getInventory();
+        if(InventoryManager.isCachedInventory(inventory)){
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onMoveItem(InventoryClickEvent event){
+        if(event.isCancelled())return;
+        Inventory inventory = event.getInventory();
+        if(InventoryManager.isCachedInventory(inventory)){
             event.setCancelled(true);
         }
     }
