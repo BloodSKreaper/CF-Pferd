@@ -1,0 +1,12 @@
+name: CF-Pferd
+version: 1.12.1
+author: ChrisOchs
+api-version: 1.14.4
+
+main: de.craftersforever.pferd.Pferd
+commands:
+  pferd:
+    description: Summons a horse
+    usage: /<command>  
+    permission: cf.pferd
+    aliases: [Horse, horse]
