@@ -1,4 +1,4 @@
-package de.craftersforever.pferd.listeners;
+package de.craftersforever.sleipnir.listeners;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;

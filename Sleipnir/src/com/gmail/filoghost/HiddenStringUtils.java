@@ -1,8 +1,10 @@
 package com.gmail.filoghost;
 
+import org.bukkit.ChatColor;
+
 import java.nio.charset.StandardCharsets;
 
-import org.bukkit.ChatColor;
+
 
 public class HiddenStringUtils {
 

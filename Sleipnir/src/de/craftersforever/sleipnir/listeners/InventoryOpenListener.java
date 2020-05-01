@@ -1,6 +1,6 @@
-package de.craftersforever.pferd.listeners;
+package de.craftersforever.sleipnir.listeners;
 
-import de.craftersforever.pferd.inventory.InventoryManager;
+import de.craftersforever.sleipnir.inventory.InventoryManager;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.event.EventHandler;

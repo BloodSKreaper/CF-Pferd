@@ -1,0 +1,7 @@
+#Sleipnir - feel yourself like a god by summoning your personal horse
+#Here you can set wheter a summoned horse should be able to take damage or not
+horse:
+  invincible: true
+#Supported languages "de_DE" and "en_EN"
+lang: "de"
+country: "DE"

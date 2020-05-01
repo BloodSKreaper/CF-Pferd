@@ -1,4 +1,4 @@
-package de.craftersforever.pferd.inventory;
+package de.craftersforever.sleipnir.inventory;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

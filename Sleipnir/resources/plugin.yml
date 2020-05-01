@@ -1,4 +1,4 @@
-name: CF-Pferd
+name: ${artifactId}
 version: ${version}
 author: ${author}
 website: ${url}
@@ -6,8 +6,8 @@ api-version: ${api-version}
 
 main: ${mainClass}
 commands:
-  pferd:
+  horse:
     description: Summons a horse
     usage: /<command>  
-    permission: cf.pferd
-    aliases: [Horse, horse]
+    permission: sleipnir.summon
+    aliases: [pferd, horse]
