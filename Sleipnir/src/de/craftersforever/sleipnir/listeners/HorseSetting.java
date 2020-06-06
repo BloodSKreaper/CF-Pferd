@@ -24,15 +24,6 @@ public class HorseSetting {
         adult = true;
     }
 
-    public HorseSetting(double speed, double jumpstrength, Material armormaterial, Horse.Style style, Horse.Color color, boolean adult) {
-        this.speed = speed;
-        this.jumpstrength = jumpstrength;
-        this.armor = new ItemStack(armormaterial);
-        this.style = style;
-        this.color = color;
-
-    }
-
     public HorseSetting(double speed, double jumpstrength, String armormaterial, String styleName, String colorName, boolean adult) {
         this.speed = speed;
         this.jumpstrength = jumpstrength;
@@ -56,11 +47,12 @@ public class HorseSetting {
 
         Horse.Color color;
         try {
-            color = Horse.Color.valueOf(styleName);
+            color = Horse.Color.valueOf(colorName);
         } catch (IllegalArgumentException exception) {
             color = Horse.Color.WHITE;
         }
         this.color = color;
+        this.adult = adult;
     }
 
     public double getSpeed() {

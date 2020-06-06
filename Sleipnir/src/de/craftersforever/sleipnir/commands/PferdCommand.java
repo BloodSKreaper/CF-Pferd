@@ -3,7 +3,6 @@ package de.craftersforever.sleipnir.commands;
 import de.craftersforever.sleipnir.Sleipnir;
 import de.craftersforever.sleipnir.listeners.HorseSetting;
 import org.bukkit.ChatColor;
-import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
@@ -14,10 +13,9 @@ import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.plugin.Plugin;
 
 public class PferdCommand implements CommandExecutor {
-    private Sleipnir sleipnir;
+    private final Sleipnir sleipnir;
 
     public PferdCommand(Sleipnir plugin) {
         this.sleipnir = plugin;
@@ -41,7 +39,7 @@ public class PferdCommand implements CommandExecutor {
 
     private void spawnHorse(Player p) {
         Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
-        if(!h.isValid()){
+        if (!h.isValid()) {
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', sleipnir.getTextManager().getText("HORSE_NOT_SUMMONED")));
             return;
         }
@@ -53,6 +51,7 @@ public class PferdCommand implements CommandExecutor {
         HorseSetting horseSetting = sleipnir.getHorseSetting(p.getUniqueId());
         h.setJumpStrength(horseSetting.getJumpstrength());
         h.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(horseSetting.getSpeed());
+
         h.setStyle(horseSetting.getStyle());
         h.setColor(horseSetting.getColor());
         h.getInventory().setArmor(horseSetting.getArmor());

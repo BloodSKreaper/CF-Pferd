@@ -10,8 +10,8 @@ import java.util.UUID;
 
 public class InventoryManager {
 
-    private static HashMap<UUID, Inventory> inventories = new HashMap<>();
-    private static ItemSets itemSets = new ItemSets();
+    private static final HashMap<UUID, Inventory> inventories = new HashMap<>();
+    private static final ItemSets itemSets = new ItemSets();
 
 
     public static Inventory getInventory(UUID uuid) {
@@ -25,35 +25,35 @@ public class InventoryManager {
         return inv;
     }
 
-    public static boolean isCachedInventory(Inventory inventory){
+    public static boolean isCachedInventory(Inventory inventory) {
         return inventories.containsValue(inventory);
     }
 
-    public static void showCoordinationMenu(Inventory inv){
+    public static void showCoordinationMenu(Inventory inv) {
         ItemStack[] menuItems = itemSets.getSelectionMenu();
-        for(int i = 0; i < menuItems.length; i++){
-            inv.setItem(i,menuItems[i]);
+        for (int i = 0; i < menuItems.length; i++) {
+            inv.setItem(i, menuItems[i]);
         }
     }
 
-    public static void showColorMenu(Inventory inv){
+    public static void showColorMenu(Inventory inv) {
         ItemStack[] menuItems = itemSets.getColorMenu();
-        for(int i = 0; i < menuItems.length; i++){
-            inv.setItem(i,menuItems[i]);
+        for (int i = 0; i < menuItems.length; i++) {
+            inv.setItem(i, menuItems[i]);
         }
     }
 
-    public static void showStyleMenu(Inventory inv){
+    public static void showStyleMenu(Inventory inv) {
         ItemStack[] menuItems = itemSets.getStyleMenu();
-        for(int i = 0; i < menuItems.length; i++){
-            inv.setItem(i,menuItems[i]);
+        for (int i = 0; i < menuItems.length; i++) {
+            inv.setItem(i, menuItems[i]);
         }
     }
 
-    public static void showArmorMenu(Inventory inv){
+    public static void showArmorMenu(Inventory inv) {
         ItemStack[] menuItems = itemSets.getArmorMenu();
-        for(int i = 0; i < menuItems.length; i++){
-            inv.setItem(i,menuItems[i]);
+        for (int i = 0; i < menuItems.length; i++) {
+            inv.setItem(i, menuItems[i]);
         }
     }
 

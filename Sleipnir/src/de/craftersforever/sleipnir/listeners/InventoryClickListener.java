@@ -20,7 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.List;
 
 public class InventoryClickListener implements Listener {
-    private Sleipnir sleipnir;
+    private final Sleipnir sleipnir;
 
     public InventoryClickListener(Sleipnir sleipnir) {
         this.sleipnir = sleipnir;
@@ -74,7 +74,7 @@ public class InventoryClickListener implements Listener {
             changeColor(colorName, p);
         } else if (hiddenString.startsWith("setArmor")) {
             String armorName = hiddenString.split("setArmor")[1];
-            changeArmor(armorName, horse, p);
+            changeArmor(armorName, p);
         } else if (hiddenString.startsWith("changeAge")) {
             changeAge(p);
         } else if (hiddenString.startsWith("closeInventory")) {
@@ -119,11 +119,7 @@ public class InventoryClickListener implements Listener {
 
     private void changeAge(Player player) {
         HorseSetting setting = sleipnir.getHorseSetting(player.getUniqueId());
-        if (setting.isAdult()) {
-            setting.setAdult(false);
-        } else {
-            setting.setAdult(true);
-        }
+        setting.setAdult(!setting.isAdult());
         sleipnir.setHorseSetting(player.getUniqueId(), setting);
     }
 
@@ -141,7 +137,7 @@ public class InventoryClickListener implements Listener {
     }
 
 
-    private void changeArmor(String armorName, Horse horse, Player player) {
+    private void changeArmor(String armorName, Player player) {
         Material armorMaterial;
         try {
             armorMaterial = Material.valueOf(armorName);

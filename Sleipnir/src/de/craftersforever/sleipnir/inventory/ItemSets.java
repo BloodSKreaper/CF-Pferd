@@ -1,18 +1,18 @@
 package de.craftersforever.sleipnir.inventory;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.gmail.filoghost.HiddenStringUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class ItemSets {
-    private ItemStack[] selection = new ItemStack[9];
-    private ItemStack[] color = new ItemStack[9];
-    private ItemStack[] style = new ItemStack[9];
-    private ItemStack[] armor = new ItemStack[9];
+    private final ItemStack[] selection = new ItemStack[9];
+    private final ItemStack[] color = new ItemStack[9];
+    private final ItemStack[] style = new ItemStack[9];
+    private final ItemStack[] armor = new ItemStack[9];
 
     ItemSets() {
         setupColorMenu();

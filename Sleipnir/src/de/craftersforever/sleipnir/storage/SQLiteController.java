@@ -1,19 +1,11 @@
 package de.craftersforever.sleipnir.storage;
 
 import de.craftersforever.sleipnir.Sleipnir;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Horse;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.UUID;
-import java.util.logging.Level;
 
 public class SQLiteController {
 
@@ -38,29 +30,27 @@ public class SQLiteController {
     public ResultSet getPlayerSettings(UUID uuid) {
         try {
             Statement stmt = connection.createStatement();
-            return stmt.executeQuery("SELECT * FROM Playersetting WHERE player_uuid = \"" + uuid.toString()+"\"");
+            return stmt.executeQuery("SELECT * FROM Playersetting WHERE player_uuid = \"" + uuid.toString() + "\"");
         } catch (SQLException exception) {
             exception.printStackTrace();
             return null;
         }
     }
 
-    public boolean setPlayerSetting(UUID uuid, Horse.Color color, Horse.Style style, boolean adult, double speed, double jumpstrength, Material armor) {
+    public void setPlayerSetting(UUID uuid, Horse.Color color, Horse.Style style, boolean adult, double speed, double jumpstrength, Material armor) {
         try {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate("INSERT INTO Playersetting" +
                     "(player_uuid, color, style, adult, speed, jumpstrength, armor) VALUES " +
                     "(\"" + uuid.toString() + "\", \"" + color.name() + "\", \"" + style.name() + "\", " + adult + ", " + speed + ", " + jumpstrength + ", \"" + armor.toString() + "\")" +
-                    "ON CONFLICT(player_uuid) DO UPDATE SET color=\"" + color.name() + "\",style=\"" + style.name() + "\",adult=" + adult + ",speed=" + speed + ",jumpstrength=" + jumpstrength + ",armor=\"" + armor.toString()+"\"");
-            return true;
+                    "ON CONFLICT(player_uuid) DO UPDATE SET color=\"" + color.name() + "\",style=\"" + style.name() + "\",adult=" + adult + ",speed=" + speed + ",jumpstrength=" + jumpstrength + ",armor=\"" + armor.toString() + "\"");
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return false;
         }
 
     }
 
-    private boolean createTableIfNotExist() {
+    private void createTableIfNotExist() {
         /*
         *primary_key*, _secondary_key_
         tables:
@@ -78,10 +68,8 @@ public class SQLiteController {
                     "  speed DOUBLE,\n" +
                     "  jumpstrength DOUBLE\n" +
                     ");");
-            return true;
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return false;
         }
     }
 
@@ -112,48 +100,4 @@ public class SQLiteController {
         });
     }
 
-    private void handleDB() {
-        try {
-            Statement stmt = connection.createStatement();
-            stmt.executeUpdate("DROP TABLE IF EXISTS books;");
-            stmt.executeUpdate("CREATE TABLE books (author, title, publication, pages, price);");
-            stmt.execute("INSERT INTO books (author, title, publication, pages, price) VALUES ('Paulchen Paule', 'Paul der Penner', '2001-05-06', '1234', '5.67')");
-
-            PreparedStatement ps = connection
-                    .prepareStatement("INSERT INTO books VALUES (?, ?, ?, ?, ?);");
-
-            ps.setString(1, "Willi Winzig");
-            ps.setString(2, "Willi's Wille");
-            ps.setDate(3, Date.valueOf("2011-05-16"));
-            ps.setInt(4, 432);
-            ps.setDouble(5, 32.95);
-            ps.addBatch();
-
-            ps.setString(1, "Anton Antonius");
-            ps.setString(2, "Anton's Alarm");
-            ps.setDate(3, Date.valueOf("2009-10-01"));
-            ps.setInt(4, 123);
-            ps.setDouble(5, 98.76);
-            ps.addBatch();
-
-            connection.setAutoCommit(false);
-            ps.executeBatch();
-            connection.setAutoCommit(true);
-
-            ResultSet rs = stmt.executeQuery("SELECT * FROM books;");
-            while (rs.next()) {
-                System.out.println("Autor = " + rs.getString("author"));
-                System.out.println("Titel = " + rs.getString("title"));
-                System.out.println("Erscheinungsdatum = "
-                        + rs.getDate("publication"));
-                System.out.println("Seiten = " + rs.getInt("pages"));
-                System.out.println("Preis = " + rs.getDouble("price"));
-            }
-            rs.close();
-            connection.close();
-        } catch (SQLException e) {
-            System.err.println("Couldn't handle DB-Query");
-            e.printStackTrace();
-        }
-    }
 }
