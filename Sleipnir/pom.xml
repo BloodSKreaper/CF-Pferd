@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <author>BloodSKreaper</author>
         <mainClass>de.craftersforever.sleipnir.Sleipnir</mainClass>
-        <api-version>1.14</api-version>
+        <api-version>1.16</api-version>
     </properties>
 
     <build>
@@ -26,17 +26,10 @@
                 <directory>resources/</directory>
                 <filtering>true</filtering>
                 <includes>
-                    <include>plugin.yml</include>
-                    <include>config.yml</include>
-                    <!-- Add other any other .yml or text files here -->
-                </includes>
-            </resource>
-            <resource>
-                <directory>resources/</directory>
-                <filtering>true</filtering>
-                <includes>
                     <include>lang/i18n_de_DE.properties</include>
                     <include>lang/i18n_en_US.properties</include>
+                    <include>plugin.yml</include>
+                    <include>config.yml</include>
                     <!-- Add other any other .yml or text files here -->
                 </includes>
             </resource>
@@ -64,7 +57,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.15.2-R0.1-SNAPSHOT</version>
+            <version>1.16.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -3,7 +3,9 @@ package de.craftersforever.sleipnir;
 
 import de.craftersforever.sleipnir.commands.PferdCommand;
 import de.craftersforever.sleipnir.listeners.*;
+import de.craftersforever.sleipnir.storage.MySQLController;
 import de.craftersforever.sleipnir.storage.SQLiteController;
+import de.craftersforever.sleipnir.storage.StorageDriver;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Horse;
@@ -13,21 +15,80 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 
 public class Sleipnir extends JavaPlugin {
     private boolean invincibleHorse;
     private TextManager textManager;
     private final HashMap<UUID, HorseSetting> horseSettings = new HashMap<>();
-    private SQLiteController sqLiteController;
+    private StorageDriver storageDriver;
+    private static Sleipnir sleipnir;
+
+    public static Sleipnir getInstance() {
+        return sleipnir;
+    }
 
 
     public void onEnable() {
+        sleipnir = this;
         initializeConfig();
-        sqLiteController = new SQLiteController(this);
+        if (getConfig().getString("storage").equals("sqlite")) {
+            storageDriver = new SQLiteController(this);
+        } else {
+            storageDriver = new MySQLController(this);
+        }
         textManager = new TextManager(this);
         registerListeners();
         registerCommands();
+        startSaveScheduler();
+    }
+
+    private void startSaveScheduler() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+                savePlayerData(true);
+            }
+        }, 0l, 2400l);
+    }
+
+    private void savePlayerData(boolean async) {
+        if (!async) {
+            for (UUID uuid : horseSettings.keySet()) {
+                HorseSetting horseSetting = horseSettings.get(uuid);
+                double speed = horseSetting.getSpeed();
+                double jumpstrength = horseSetting.getJumpstrength();
+                Material armorMaterial = horseSetting.getArmor().getType();
+                Horse.Color color = horseSetting.getColor();
+                Horse.Style style = horseSetting.getStyle();
+                boolean adult = horseSetting.isAdult();
+                storageDriver.setPlayerSetting(uuid, color, style, adult, speed, jumpstrength, armorMaterial);
+            }
+        } else {
+            Iterator<Map.Entry<UUID, HorseSetting>> iter = horseSettings.entrySet().iterator();
+            while (iter.hasNext()) {
+                Map.Entry<UUID, HorseSetting> entry = iter.next();
+                HorseSetting horseSetting = entry.getValue();
+                final UUID uuid = entry.getKey();
+                final double speed = horseSetting.getSpeed();
+                final double jumpstrength = horseSetting.getJumpstrength();
+                final Material armorMaterial = horseSetting.getArmor().getType();
+                final Horse.Color color = horseSetting.getColor();
+                final Horse.Style style = horseSetting.getStyle();
+                final boolean adult = horseSetting.isAdult();
+                Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
+                    @Override
+                    public void run() {
+                        storageDriver.setPlayerSetting(uuid, color, style, adult, speed, jumpstrength, armorMaterial);
+                    }
+                });
+                if (!getServer().getOfflinePlayer(uuid).isOnline()) {
+                    iter.remove();
+                }
+            }
+        }
     }
 
     private void initializeConfig() {
@@ -57,16 +118,7 @@ public class Sleipnir extends JavaPlugin {
     }
 
     public void onDisable() {
-        for (UUID uuid : horseSettings.keySet()) {
-            HorseSetting horseSetting = horseSettings.get(uuid);
-            double speed = horseSetting.getSpeed();
-            double jumpstrength = horseSetting.getJumpstrength();
-            Material armorMaterial = horseSetting.getArmor().getType();
-            Horse.Color color = horseSetting.getColor();
-            Horse.Style style = horseSetting.getStyle();
-            boolean adult = horseSetting.isAdult();
-            sqLiteController.setPlayerSetting(uuid, color, style, adult, speed, jumpstrength, armorMaterial);
-        }
+        savePlayerData(false);
     }
 
     public HorseSetting getHorseSetting(UUID uniqueId) {
@@ -82,33 +134,34 @@ public class Sleipnir extends JavaPlugin {
         Bukkit.getScheduler().runTaskAsynchronously(this, new Runnable() {
             @Override
             public void run() {
-                ResultSet resultSet = sqLiteController.getPlayerSettings(uuid);
+                ResultSet resultSet = storageDriver.getPlayerSettings(uuid);
+
                 HorseSetting horseSetting = null;
                 try {
-                    while (resultSet.next()) {
-                        double speed = resultSet.getDouble("speed");
-                        double jumpstrength = resultSet.getDouble("jumpstrength");
-                        String armorMaterial = resultSet.getString("armor");
-                        String color = resultSet.getString("color");
-                        String style = resultSet.getString("style");
-                        boolean adult = resultSet.getBoolean("adult");
-                        horseSetting = new HorseSetting(speed, jumpstrength, armorMaterial, style, color, adult);
+                    if (!resultSet.isBeforeFirst()) {
+                        horseSetting = new HorseSetting();
+                    } else {
+                        while (resultSet.next()) {
+                            double speed = resultSet.getDouble("speed");
+                            double jumpstrength = resultSet.getDouble("jumpstrength");
+                            String armorMaterial = resultSet.getString("armor");
+                            String color = resultSet.getString("color");
+                            String style = resultSet.getString("style");
+                            boolean adult = resultSet.getBoolean("adult");
+                            horseSetting = new HorseSetting(speed, jumpstrength, armorMaterial, style, color, adult);
+                        }
                     }
-                } catch (SQLException exception) {
-                    exception.printStackTrace();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
                 }
-
-                if(horseSetting == null){
-                    horseSetting = new HorseSetting();
-                }
-
                 horseSettings.put(uuid, horseSetting);
-
             }
         });
     }
 
     public void setHorseSetting(UUID uuid, HorseSetting horseSetting) {
-        horseSettings.put(uuid, horseSetting);
+        if (horseSetting != null) {
+            horseSettings.put(uuid, horseSetting);
+        }
     }
 }

@@ -7,10 +7,10 @@ import org.bukkit.entity.Horse;
 import java.sql.*;
 import java.util.UUID;
 
-public class SQLiteController {
+public class SQLiteController extends StorageDriver{
 
-    private static Connection connection;
-    private static String DB_PATH;
+    private Connection connection;
+    private String DB_PATH;
 
     static {
         try {

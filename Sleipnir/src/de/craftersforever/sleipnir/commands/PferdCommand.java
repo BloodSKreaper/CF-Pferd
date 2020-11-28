@@ -1,7 +1,7 @@
 package de.craftersforever.sleipnir.commands;
 
 import de.craftersforever.sleipnir.Sleipnir;
-import de.craftersforever.sleipnir.listeners.HorseSetting;
+import de.craftersforever.sleipnir.HorseSetting;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;

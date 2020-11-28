@@ -5,3 +5,10 @@ horse:
 #Supported languages "de_DE" and "en_EN"
 lang: "de"
 country: "DE"
+#Either sqlite or mysql. In case of mysql you have to fill in host, database, user and password below
+storage: sqlite
+mysql:
+  host: localhost
+  database: sleipnir
+  user: sleipnir
+  password: secretpasswordforsleipnirdatabaseuser

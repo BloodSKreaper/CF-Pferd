@@ -7,8 +7,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.EquipmentSlot;
 
 public class PlayerListener implements Listener {
     private final Sleipnir sleipnir;
@@ -26,6 +28,7 @@ public class PlayerListener implements Listener {
         }
 
     }
+
 
     @SuppressWarnings("unused")
     @EventHandler

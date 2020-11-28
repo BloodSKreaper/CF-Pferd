@@ -1,9 +1,13 @@
 package de.craftersforever.sleipnir.inventory;
 
-import com.gmail.filoghost.HiddenStringUtils;
+import de.craftersforever.sleipnir.Sleipnir;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataHolder;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,15 +143,17 @@ class ItemSets {
     }
 
 
-    private ItemStack getItemStack(Material material, String stackName, String lore, String hiddenString) {
+    private ItemStack getItemStack(Material material, String stackName, String lore, String command) {
         List<String> itemLore = new ArrayList<>();
         itemLore.add(lore);
-        itemLore.add(HiddenStringUtils.encodeString(hiddenString));
         ItemStack itemStack = new ItemStack(material, 1);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta != null) {
             itemMeta.setDisplayName(stackName);
             itemMeta.setLore(itemLore);
+            PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
+            NamespacedKey namespacedKey = new NamespacedKey(Sleipnir.getInstance(), "command");
+            persistentDataContainer.set(namespacedKey, PersistentDataType.STRING, command);
         }
         itemStack.setItemMeta(itemMeta);
         return itemStack;

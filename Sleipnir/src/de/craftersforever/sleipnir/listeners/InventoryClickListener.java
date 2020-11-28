@@ -1,10 +1,11 @@
 package de.craftersforever.sleipnir.listeners;
 
-import com.gmail.filoghost.HiddenStringUtils;
+import de.craftersforever.sleipnir.HorseSetting;
 import de.craftersforever.sleipnir.Sleipnir;
 import de.craftersforever.sleipnir.inventory.InventoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
@@ -16,6 +17,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
 
@@ -45,7 +48,7 @@ public class InventoryClickListener implements Listener {
         if (e.getCurrentItem() == null) return;
         if (!e.getCurrentItem().hasItemMeta()) return;
         if (!e.getCurrentItem().getItemMeta().hasLore()) return;
-        if (e.getCurrentItem().getItemMeta().getLore().size() < 2) return;
+        if (e.getCurrentItem().getItemMeta().getLore().size() < 1) return;
         if (!p.isInsideVehicle()) {
             p.closeInventory();
             return;
@@ -62,22 +65,24 @@ public class InventoryClickListener implements Listener {
         p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_ON, 1, 1);
         ItemMeta itemMeta = e.getCurrentItem().getItemMeta();
         List<String> itemLore = itemMeta.getLore();
-        String hiddenString = HiddenStringUtils.extractHiddenString(itemLore.get(1));
-        if (hiddenString.startsWith("setStyle")) {
-            String styleName = hiddenString.split("setStyle")[1];
+        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
+        NamespacedKey namespacedKey = new NamespacedKey(Sleipnir.getInstance(), "command");
+        String command = persistentDataContainer.get(namespacedKey, PersistentDataType.STRING);
+        if (command.startsWith("setStyle")) {
+            String styleName = command.split("setStyle")[1];
             changeStyle(styleName, p);
-        } else if (hiddenString.startsWith("showMenu")) {
-            String menuName = hiddenString.split("showMenu")[1];
+        } else if (command.startsWith("showMenu")) {
+            String menuName = command.split("showMenu")[1];
             showMenu(menuName, customInventory, p);
-        } else if (hiddenString.startsWith("setColor")) {
-            String colorName = hiddenString.split("setColor")[1];
+        } else if (command.startsWith("setColor")) {
+            String colorName = command.split("setColor")[1];
             changeColor(colorName, p);
-        } else if (hiddenString.startsWith("setArmor")) {
-            String armorName = hiddenString.split("setArmor")[1];
+        } else if (command.startsWith("setArmor")) {
+            String armorName = command.split("setArmor")[1];
             changeArmor(armorName, p);
-        } else if (hiddenString.startsWith("changeAge")) {
+        } else if (command.startsWith("changeAge")) {
             changeAge(p);
-        } else if (hiddenString.startsWith("closeInventory")) {
+        } else if (command.startsWith("closeInventory")) {
             p.closeInventory();
         }
         changeRidingHorse(p, horse);

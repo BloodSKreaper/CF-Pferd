@@ -1,4 +1,4 @@
-package de.craftersforever.sleipnir.listeners;
+package de.craftersforever.sleipnir;
 
 import de.craftersforever.sleipnir.Utils;
 import org.bukkit.Bukkit;
@@ -16,8 +16,8 @@ public class HorseSetting {
     private boolean adult;
 
     public HorseSetting() {
-        speed = 0.2;
-        jumpstrength = 1;
+        speed = 0.225;
+        jumpstrength = 0.7;
         armor = new ItemStack(Material.AIR);
         style = Utils.randomEnum(Horse.Style.class);
         color = Utils.randomEnum(Horse.Color.class);
